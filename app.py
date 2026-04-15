@@ -283,7 +283,7 @@ if page == "🏠 Home & Dataset":
     """, unsafe_allow_html=True)
 
     if df is not None:
-        st.markdown(f'<div class="success-alert">✅ <b>creditcard.csv</b> loaded automatically from:<br><code>{CSV_PATH}</code></div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="success-alert">✅ <b>creditcard.csv</b> loaded :<br><code>{CSV_PATH}</code></div>', unsafe_allow_html=True)
     else:
         st.markdown(f'<div class="error-alert">❌ <b>creditcard.csv not found!</b><br>Expected location: <code>{CSV_PATH}</code><br>Place creditcard.csv in the same folder as app.py and restart.</div>', unsafe_allow_html=True)
 
