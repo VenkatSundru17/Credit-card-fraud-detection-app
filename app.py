@@ -23,7 +23,7 @@ from sklearn.preprocessing import StandardScaler
 # PAGE CONFIG
 # ─────────────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="Credit Card Fraud Detection",
+    page_title="💳 Credit Card Fraud Detection",
     page_icon="🛡️",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -111,7 +111,9 @@ section[data-testid="stSidebar"] * { color: #e0e0e0 !important; }
 </style>
 """, unsafe_allow_html=True)
 
-
+# ─────────────────────────────────────────────────────────────────────
+# DARK PLOTLY THEME
+# ─────────────────────────────────────────────────────────────────────
 DARK = dict(
     paper_bgcolor='rgba(0,0,0,0)',
     plot_bgcolor='rgba(0,0,0,0)',
@@ -125,6 +127,10 @@ import os
 import pandas as pd
 import streamlit as st
 import joblib
+
+# ─────────────────────────────────────────────────────────────────────
+# PATHS — files must be in SAME FOLDER as this script
+# ─────────────────────────────────────────────────────────────────────
 
 CSV_PATH = "creditcard.csv"
 PKL_PATH = "xgboost.pkl"
@@ -235,7 +241,7 @@ with st.sidebar:
     st.markdown("<hr style='border-color:rgba(255,255,255,0.08)'>", unsafe_allow_html=True)
 
     # File status
-    st.markdown("<div style='font-size:0.78rem;color:#a78bfa;font-weight:700;margin-bottom:0.4rem'>File Status</div>", unsafe_allow_html=True)
+    st.markdown("<div style='font-size:0.78rem;color:#a78bfa;font-weight:700;margin-bottom:0.4rem'>📂 File Status</div>", unsafe_allow_html=True)
     csv_status = "✅ creditcard.csv" if df is not None else "❌ creditcard.csv missing"
     pkl_status = "✅ xgboost.pkl"   if xgb_ok        else "❌ xgboost.pkl missing"
     csv_color  = "#6ee7b7" if df is not None else "#fca5a5"
@@ -257,11 +263,11 @@ with st.sidebar:
 # ─────────────────────────────────────────────────────────────────────
 st.markdown("""
 <div class="hero-banner">
-  <div class="hero-title">Credit Card Fraud Detection</div>
+  <div class="hero-title">💳 Credit Card Fraud Detection</div>
   <div class="hero-subtitle">AI-powered financial security · XGBoost pre-trained model</div>
-  <span class="hero-badge">Machine Learning Project</span>
-  <span class="hero-badge" style="margin-left:0.5rem"> XGBoost Model</span>
-  <span class="hero-badge" style="margin-left:0.5rem"> 284K+ Transactions Analysed</span>
+  <span class="hero-badge">🎓 Machine Learning Project</span>
+  <span class="hero-badge" style="margin-left:0.5rem">⚡ XGBoost Model</span>
+  <span class="hero-badge" style="margin-left:0.5rem">📊 284K+ Transactions Analysed</span>
 </div>
 """, unsafe_allow_html=True)
 
@@ -269,7 +275,7 @@ st.markdown("""
 # ═════════════════════════════════════════════════════════════════════
 # PAGE 1 – HOME & DATASET
 # ═════════════════════════════════════════════════════════════════════
-if page == "Home & Dataset":
+if page == "🏠 Home & Dataset":
 
     st.markdown("""
     <div class="section-header">
@@ -280,22 +286,22 @@ if page == "Home & Dataset":
     """, unsafe_allow_html=True)
 
     if df is not None:
-        st.markdown(f'<div class="success-alert"> <b>creditcard.csv</b> loaded automatically from:<br><code>{CSV_PATH}</code></div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="success-alert">✅ <b>creditcard.csv</b> loaded automatically from:<br><code>{CSV_PATH}</code></div>', unsafe_allow_html=True)
     else:
-        st.markdown(f'<div class="error-alert"> <b>creditcard.csv not found!</b><br>Expected location: <code>{CSV_PATH}</code><br>Place creditcard.csv in the same folder as app.py and restart.</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="error-alert">❌ <b>creditcard.csv not found!</b><br>Expected location: <code>{CSV_PATH}</code><br>Place creditcard.csv in the same folder as app.py and restart.</div>', unsafe_allow_html=True)
 
     # Model status
     st.markdown("""
     <div class="section-header">
-      <div class="icon-circle" style="background:linear-gradient(135deg,#10b981,#059669)"> </div>
+      <div class="icon-circle" style="background:linear-gradient(135deg,#10b981,#059669)">📦</div>
       <div><h2>Model Status</h2><p>xgboost.pkl loaded automatically from same folder</p></div>
     </div>
     """, unsafe_allow_html=True)
 
     if xgb_ok:
-        st.markdown(f'<div class="success-alert"> <b>xgboost.pkl</b> loaded successfully from:<br><code>{PKL_PATH}</code></div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="success-alert">✅ <b>xgboost.pkl</b> loaded successfully from:<br><code>{PKL_PATH}</code></div>', unsafe_allow_html=True)
     else:
-        st.markdown(f'<div class="error-alert"> <b>xgboost.pkl not found!</b><br>Expected: <code>{PKL_PATH}</code><br>Place xgboost.pkl in the same folder as app.py and restart.</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="error-alert">❌ <b>xgboost.pkl not found!</b><br>Expected: <code>{PKL_PATH}</code><br>Place xgboost.pkl in the same folder as app.py and restart.</div>', unsafe_allow_html=True)
 
     if df is not None:
         fraud_count = int(df['Class'].sum())
@@ -304,17 +310,17 @@ if page == "Home & Dataset":
 
         st.markdown("""
         <div class="section-header">
-          <div class="icon-circle" style="background:linear-gradient(135deg,#f59e0b,#d97706)"></div>
+          <div class="icon-circle" style="background:linear-gradient(135deg,#f59e0b,#d97706)">📊</div>
           <div><h2>Dataset Overview</h2></div>
         </div>
         """, unsafe_allow_html=True)
 
         c1, c2, c3, c4 = st.columns(4)
         for col, icon, val, label in [
-            (c1, "", f"{len(df):,}",     "Total Transactions"),
-            (c2, "", f"{legit_count:,}", "Legitimate"),
-            (c3, "", f"{fraud_count:,}", "Fraudulent"),
-            (c4, "", f"{fraud_pct:.3f}%","Fraud Rate"),
+            (c1, "📦", f"{len(df):,}",     "Total Transactions"),
+            (c2, "✅", f"{legit_count:,}", "Legitimate"),
+            (c3, "🚨", f"{fraud_count:,}", "Fraudulent"),
+            (c4, "📉", f"{fraud_pct:.3f}%","Fraud Rate"),
         ]:
             with col:
                 st.markdown(f"""
@@ -338,17 +344,17 @@ if page == "Home & Dataset":
             ]:
                 st.markdown(f'<div class="info-card"><h4>{h}</h4><p>{v}</p></div>', unsafe_allow_html=True)
 
-        with st.expander("Statistical Summary"):
+        with st.expander("📊 Statistical Summary"):
             st.dataframe(df.describe().T.style.background_gradient(cmap='Blues'), use_container_width=True)
 
 
 # ═════════════════════════════════════════════════════════════════════
 # PAGE 2 – EDA & VISUALISATIONS
 # ═════════════════════════════════════════════════════════════════════
-elif page == " EDA & Visualisations":
+elif page == "📊 EDA & Visualisations":
 
     if df is None:
-        st.markdown(f'<div class="error-alert"> creditcard.csv not found at <code>{CSV_PATH}</code>. Place it in the same folder as app.py and restart.</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="error-alert">❌ creditcard.csv not found at <code>{CSV_PATH}</code>. Place it in the same folder as app.py and restart.</div>', unsafe_allow_html=True)
         st.stop()
 
     st.markdown("""
@@ -359,8 +365,8 @@ elif page == " EDA & Visualisations":
     """, unsafe_allow_html=True)
 
     tab1, tab2, tab3, tab4, tab5 = st.tabs([
-        " Class Distribution", " Time Analysis",
-        " Amount Analysis", " Correlation", " Outliers"
+        "🍩 Class Distribution", "⏰ Time Analysis",
+        "💰 Amount Analysis", "🔥 Correlation", "📦 Outliers"
     ])
 
     with tab1:
@@ -380,10 +386,10 @@ elif page == " EDA & Visualisations":
 
         c1, c2 = st.columns(2)
         with c1:
-            st.markdown(f'<div class="info-card" style="border-left-color:#10b981"><h4> Legitimate</h4>'
+            st.markdown(f'<div class="info-card" style="border-left-color:#10b981"><h4>✅ Legitimate</h4>'
                         f'<p><b style="font-size:1.4rem;color:#10b981">{counts[0]:,}</b> ({counts[0]/len(df)*100:.2f}%)</p></div>', unsafe_allow_html=True)
         with c2:
-            st.markdown(f'<div class="info-card" style="border-left-color:#ef4444"><h4> Fraudulent</h4>'
+            st.markdown(f'<div class="info-card" style="border-left-color:#ef4444"><h4>🚨 Fraudulent</h4>'
                         f'<p><b style="font-size:1.4rem;color:#ef4444">{counts[1]:,}</b> ({counts[1]/len(df)*100:.4f}%)</p></div>', unsafe_allow_html=True)
 
     with tab2:
@@ -445,7 +451,7 @@ elif page == " EDA & Visualisations":
 # ═════════════════════════════════════════════════════════════════════
 # PAGE 3 – MODEL STATUS & EVALUATE
 # ═════════════════════════════════════════════════════════════════════
-elif page == " Model Status & Evaluate":
+elif page == "📋 Model Status & Evaluate":
 
     st.markdown("""
     <div class="section-header">
@@ -456,13 +462,13 @@ elif page == " Model Status & Evaluate":
     """, unsafe_allow_html=True)
 
     if xgb_ok:
-        st.markdown(f'<div class="success-alert"> <b>XGBoost</b> loaded from <code>{PKL_PATH}</code></div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="success-alert">✅ <b>XGBoost</b> loaded from <code>{PKL_PATH}</code></div>', unsafe_allow_html=True)
     else:
-        st.markdown(f'<div class="error-alert"> <b>XGBoost not loaded</b> — {xgb_err}<br>Place <code>xgboost.pkl</code> in the same folder as app.py and restart.</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="error-alert">❌ <b>XGBoost not loaded</b> — {xgb_err}<br>Place <code>xgboost.pkl</code> in the same folder as app.py and restart.</div>', unsafe_allow_html=True)
         st.stop()
 
     if df is None:
-        st.markdown(f'<div class="error-alert"> <b>creditcard.csv not found</b> at <code>{CSV_PATH}</code><br>Place it in the same folder as app.py and restart.</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="error-alert">❌ <b>creditcard.csv not found</b> at <code>{CSV_PATH}</code><br>Place it in the same folder as app.py and restart.</div>', unsafe_allow_html=True)
         st.stop()
 
     st.markdown("---")
@@ -474,7 +480,7 @@ elif page == " Model Status & Evaluate":
     </div>
     """, unsafe_allow_html=True)
 
-    with st.expander(" Evaluation Configuration", expanded=True):
+    with st.expander("⚙️ Evaluation Configuration", expanded=True):
         c1, c2 = st.columns(2)
         with c1:
             test_size   = st.slider("Test Split (%)", 10, 40, 20) / 100
@@ -482,7 +488,7 @@ elif page == " Model Status & Evaluate":
             random_seed = st.number_input("Random Seed", value=42, min_value=0)
 
     if st.button("🔍 Evaluate XGBoost Model"):
-        with st.spinner(" Running evaluation…"):
+        with st.spinner("⏳ Running evaluation…"):
             df2 = df.copy()
             df2['Class'] = df2['Class'].astype(int)
             X = df2[FEATURE_COLS]
@@ -511,12 +517,12 @@ elif page == " Model Status & Evaluate":
             st.session_state.X_test = X_test_sc
             st.session_state.y_test = y_test
 
-        st.markdown('<div class="success-alert"> Evaluation complete!</div>', unsafe_allow_html=True)
+        st.markdown('<div class="success-alert">✅ Evaluation complete!</div>', unsafe_allow_html=True)
 
     if st.session_state.eval_results:
         r = st.session_state.eval_results[0]
         keys = ["Model", "Accuracy", "Precision", "Recall", "F1 Score", "ROC AUC"]
-        st.markdown("#### Results")
+        st.markdown("#### 📊 Results")
         st.dataframe(pd.DataFrame([{k: r[k] for k in keys}]), use_container_width=True)
 
         metrics = ["Accuracy", "Precision", "Recall", "F1 Score", "ROC AUC"]
@@ -542,12 +548,12 @@ elif page == " Model Status & Evaluate":
         """, unsafe_allow_html=True)
 
 # ═════════════════════════════════════════════════════════════════════
-# PAGE 4 – PREDICT TRANSACTION 
+# PAGE 4 – PREDICT TRANSACTION (FIXED VERSION)
 # ═════════════════════════════════════════════════════════════════════
-elif page == " Predict Transaction":
+elif page == "🔮 Predict Transaction":
 
     # ─────────────────────────────────────────────────────────────
-    # LOAD SCALER
+    # LOAD SCALER (ADD THIS ONCE IN YOUR APP)
     # ─────────────────────────────────────────────────────────────
     SCALER_PATH = "scaler.pkl"
 
@@ -559,8 +565,11 @@ elif page == " Predict Transaction":
 
     scaler = load_scaler()
 
+    # ─────────────────────────────────────────────────────────────
+    # CHECK MODEL
+    # ─────────────────────────────────────────────────────────────
     if not xgb_ok:
-        st.markdown(f'<div class="error-alert"> xgboost.pkl not found at <code>{PKL_PATH}</code></div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="error-alert">❌ xgboost.pkl not found at <code>{PKL_PATH}</code></div>', unsafe_allow_html=True)
         st.stop()
 
     # ─────────────────────────────────────────────────────────────
@@ -577,15 +586,15 @@ elif page == " Predict Transaction":
     # ─────────────────────────────────────────────────────────────
     # INPUT FIELDS
     # ─────────────────────────────────────────────────────────────
-    st.markdown("####  Enter Transaction Details")
+    st.markdown("#### 📝 Enter Transaction Details")
 
     c1, c2 = st.columns(2)
     with c1:
-        time_val = st.number_input(" Time (seconds)", value=0.0)
+        time_val = st.number_input("⏰ Time (seconds)", value=0.0)
     with c2:
-        amount_val = st.number_input(" Amount ($)", value=100.0, min_value=0.0)
+        amount_val = st.number_input("💵 Amount ($)", value=100.0, min_value=0.0)
 
-    with st.expander(" PCA Features V1–V28 (Advanced)", expanded=False):
+    with st.expander("🔢 PCA Features V1–V28 (Advanced)", expanded=False):
         v_vals = {}
         cols_v = st.columns(4)
 
@@ -609,21 +618,22 @@ elif page == " Predict Transaction":
     # ─────────────────────────────────────────────────────────────
     # PREDICTION BUTTON
     # ─────────────────────────────────────────────────────────────
-    if st.button(" Analyse Transaction"):
+    if st.button("🔍 Analyse Transaction"):
 
         # Convert to DataFrame
         input_df = pd.DataFrame([input_data])
 
+        # 🔥 IMPORTANT: Maintain same feature order
         input_df = input_df[FEATURE_COLS]
 
         # ─────────────────────────────────────────
-        # APPLY SCALING 
+        # APPLY SCALING (FIXED)
         # ─────────────────────────────────────────
         if scaler is not None:
             input_sc = scaler.transform(input_df)
         else:
             input_sc = input_df.values
-            st.warning(" Scaler not found. Using raw values (accuracy may drop).")
+            st.warning("⚠️ Scaler not found. Using raw values (accuracy may drop).")
 
         # ─────────────────────────────────────────
         # PREDICTION
@@ -638,19 +648,19 @@ elif page == " Predict Transaction":
         # OUTPUT
         # ─────────────────────────────────────────
         st.markdown("---")
-        st.markdown("### Prediction Result")
+        st.markdown("### 🎯 Prediction Result")
 
         if prediction == 1:
             st.markdown(f'''
             <div class="result-fraud">
-             FRAUDULENT TRANSACTION DETECTED!<br>
+            🚨 FRAUDULENT TRANSACTION DETECTED!<br>
             <span style="font-size:1rem;">Fraud Probability: {fraud_prob:.2f}%</span>
             </div>
             ''', unsafe_allow_html=True)
         else:
             st.markdown(f'''
             <div class="result-legit">
-             LEGITIMATE TRANSACTION<br>
+            ✅ LEGITIMATE TRANSACTION<br>
             <span style="font-size:1rem;">Legitimate Probability: {legit_prob:.2f}%</span>
             </div>
             ''', unsafe_allow_html=True)
@@ -691,13 +701,13 @@ elif page == " Predict Transaction":
 # ═════════════════════════════════════════════════════════════════════
 # PAGE 5 – MODEL PERFORMANCE
 # ═════════════════════════════════════════════════════════════════════
-elif page == " Model Performance":
+elif page == "📈 Model Performance":
 
     results = st.session_state.eval_results
     y_test  = st.session_state.y_test
 
     if not results:
-        st.warning(" No evaluation results yet. Go to **Model Status & Evaluate** and run evaluation first.")
+        st.warning("⚠️ No evaluation results yet. Go to **Model Status & Evaluate** and run evaluation first.")
         st.stop()
 
     r = results[0]
@@ -710,7 +720,7 @@ elif page == " Model Performance":
     </div>
     """, unsafe_allow_html=True)
 
-    tab1, tab2, tab3 = st.tabs([" Confusion Matrix", " ROC Curve", " Feature Importance"])
+    tab1, tab2, tab3 = st.tabs(["🔲 Confusion Matrix", "📉 ROC Curve", "⭐ Feature Importance"])
 
     with tab1:
         cm = confusion_matrix(y_test, r['_y_pred'])
@@ -739,10 +749,10 @@ elif page == " Model Performance":
         tn, fp, fn, tp = cm.ravel()
         c1, c2, c3, c4 = st.columns(4)
         for col, icon, val, label in [
-            (c1, "", f"{tn:,}", "True Negatives"),
-            (c2, "", f"{fp:,}", "False Positives"),
-            (c3, "", f"{fn:,}", "False Negatives"),
-            (c4, "", f"{tp:,}", "True Positives"),
+            (c1, "✅", f"{tn:,}", "True Negatives"),
+            (c2, "⚠️", f"{fp:,}", "False Positives"),
+            (c3, "❌", f"{fn:,}", "False Negatives"),
+            (c4, "🚨", f"{tp:,}", "True Positives"),
         ]:
             with col:
                 st.markdown(f'<div class="metric-card"><div class="metric-icon">{icon}</div>'
@@ -784,7 +794,7 @@ elif page == " Model Performance":
         else:
             st.info("Feature importances not available for this model.")
 
-        st.markdown("####  XGBoost Metrics Radar")
+        st.markdown("#### 🕸️ XGBoost Metrics Radar")
         metrics_list = ["Accuracy", "Precision", "Recall", "F1 Score", "ROC AUC"]
         values = [r[m] for m in metrics_list] + [r[metrics_list[0]]]
         fig = go.Figure()
@@ -812,7 +822,7 @@ elif page == " Model Performance":
 st.markdown("""
 <hr style="border-color:rgba(255,255,255,0.08); margin-top: 3rem">
 <div style="text-align:center; padding: 1.5rem; color:#6b7280; font-size:0.82rem">
-  <b style="color:#a78bfa">Credit Card Fraud Detection</b> · Machine Learning Project<br>
-  <span style="color:#a78bfa"> Powered by XGBoost (xgboost.pkl)</span>
+  <b style="color:#a78bfa">💳 Credit Card Fraud Detection</b> · Machine Learning Project<br>
+  <span style="color:#a78bfa">⚡ Powered by XGBoost (xgboost.pkl)</span>
 </div>
 """, unsafe_allow_html=True)
