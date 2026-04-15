@@ -128,9 +128,6 @@ import pandas as pd
 import streamlit as st
 import joblib
 
-# ─────────────────────────────────────────────────────────────────────
-# PATHS — files must be in SAME FOLDER as this script
-# ─────────────────────────────────────────────────────────────────────
 
 CSV_PATH = "creditcard.csv"
 PKL_PATH = "xgboost.pkl"
@@ -548,12 +545,12 @@ elif page == "📋 Model Status & Evaluate":
         """, unsafe_allow_html=True)
 
 # ═════════════════════════════════════════════════════════════════════
-# PAGE 4 – PREDICT TRANSACTION (FIXED VERSION)
+# PAGE 4 – PREDICT TRANSACTION
 # ═════════════════════════════════════════════════════════════════════
 elif page == "🔮 Predict Transaction":
 
     # ─────────────────────────────────────────────────────────────
-    # LOAD SCALER (ADD THIS ONCE IN YOUR APP)
+    # LOAD SCALER 
     # ─────────────────────────────────────────────────────────────
     SCALER_PATH = "scaler.pkl"
 
