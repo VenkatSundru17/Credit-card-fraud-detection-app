@@ -278,7 +278,7 @@ if page == "🏠 Home & Dataset":
     <div class="section-header">
       <div class="icon-circle" style="background:linear-gradient(135deg,#667eea,#764ba2)">📁</div>
       <div><h2>Dataset Status</h2>
-      <p>creditcard.csv is loaded automatically from the same folder as this script</p></div>
+      <p>creditcard.csv is loaded </p></div>
     </div>
     """, unsafe_allow_html=True)
 
